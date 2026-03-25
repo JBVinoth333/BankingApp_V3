@@ -1,0 +1,39 @@
+# ==== Eclipse IDE ====
+.classpath
+.project
+.settings/
+
+# ==== Java build output ====
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# ==== Maven / Gradle ====
+target/
+.gradle/
+
+# ==== WEB-INF libraries (downloaded deps) ====
+src/main/webapp/WEB-INF/lib/
+
+# ==== React / Node (frontend) ====
+frontEnd/**/node_modules/
+frontEnd/**/dist/
+frontEnd/**/.env
+frontEnd/**/.env.local
+
+# ==== OS generated files ====
+.DS_Store
+Thumbs.db
+
+# ==== Logs ====
+*.log
+
+# ==== IDE misc ====
+*.swp
+*.swo
+*~
+.idea/
+*.iml
+.vscode/
