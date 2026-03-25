@@ -32,7 +32,6 @@ public class CorsFilter implements Filter {
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
         res.setHeader("Access-Control-Allow-Credentials", "true");
 
-        // Handle preflight request
         if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
             res.setStatus(HttpServletResponse.SC_OK);
         } else {
@@ -42,5 +41,6 @@ public class CorsFilter implements Filter {
 
     @Override
     public void destroy() {
+        System.out.println("CORS Filter Destroyed");
     }
 }

@@ -134,10 +134,46 @@ public class UserDao {
     }
 
     public int getCustonerIDByAadhaarNumber(String aadhaar) {
+        try {
+            PreparedStatement ps = con.prepareStatement(Queries.GET_CUSTOMERID_BY_AADHAAR);
+            ps.setString(1, aadhaar);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("CustomerID");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " getCustonerIDByAadhaarNumber");
+        }
         return 0;
     }
 
     public String getAccountNumberByCustomerID(int customerID) {
-        return "234567890";
+        try {
+            PreparedStatement ps = con.prepareStatement(Queries.GET_AC_NUMBER_BY_CUSTOMERID);
+            ps.setInt(1, customerID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("AccountNumber");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " getAccountNumberByCustomerID");
+        }
+        return null;
+    }
+
+    public ResultSet login(String accountNumber, String pin, String secretKey) {
+        try {
+            PreparedStatement ps = con.prepareStatement(Queries.LOGIN);
+            ps.setString(1, accountNumber);
+            ps.setString(2, secretKey);
+            ps.setString(3, pin);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage() + " login");
+        }
+        return null;
     }
 }

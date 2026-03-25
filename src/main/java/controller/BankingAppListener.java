@@ -18,7 +18,6 @@ public class BankingAppListener implements ServletContextListener, ServletReques
         try {
             userDao = new UserDao();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -27,9 +26,10 @@ public class BankingAppListener implements ServletContextListener, ServletReques
         try {
             DBConnection.getInstance().getConnection().close();
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         System.out.println("Connection closed");
+        System.out.println("Listener Destroyed");
     }
 
     public void contextInitialized(ServletContextEvent sce)  {
