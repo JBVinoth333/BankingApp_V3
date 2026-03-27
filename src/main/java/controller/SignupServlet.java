@@ -42,26 +42,26 @@ public class SignupServlet extends HttpServlet {
             String accountNumber = service.createAccount(name, aadhaar, yob, mobile, email, address, balance, loginPin);
 
             if (accountNumber != null) {
-                json.put("status", 201);
+                response.setStatus(HttpServletResponse.SC_CREATED);
                 json.put("message", "Account created successfully");
                 json.put("name", name);
                 json.put("email", email);
                 json.put("accountNumber", accountNumber);
             } else {
-                json.put("status", 500);
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 json.put("message", "Account creation failed");
             }
         } catch (InvalidInputException e) {
-            json.put("status", 400);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             json.put("message", e.getMessage());
         } catch (DublicateAadhaarException | DublicateUserException e) {
-            json.put("status", 409);
+            response.setStatus(HttpServletResponse.SC_CONFLICT);
             json.put("message", e.getMessage());
         } catch (JSONException e) {
-            json.put("status", 400);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             json.put("message", "Invalid request body");
         } catch (SQLException e) {
-            json.put("status", 500);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             json.put("message", "Internal server error");
         }
 
